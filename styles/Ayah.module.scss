@@ -1,0 +1,77 @@
+@import 'colors';
+
+.light {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    text-align: center;
+    background-color: #fff;
+    // color: #fff;
+    color: $blue-gray-lite;
+    border-radius: 8px;
+    transition: .2s;
+
+    .ayahNumber {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        // background-color: $indigo;
+        background-image: url(../public/star_unfilled.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        color: #f9c100;
+        border-radius: 50%;
+    }
+
+    .ayahArText {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        display: flex;
+        align-items: flex-start;
+        line-height: 180%;
+    }
+
+    .ayahUzText {
+        font-size: 1.2rem;
+        line-height: 150%;
+        letter-spacing: 2px;
+    }
+
+    .playBtn {
+        font-size: 2rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        transition: .2s;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+
+.dark {
+    @extend .light;
+    background-color: $blue-gray;
+    color: #fff;
+
+    .ayahArText {
+        color: goldenrod;
+    }
+
+    .playBtn {
+        color: goldenrod;
+    }
+}

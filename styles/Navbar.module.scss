@@ -1,0 +1,72 @@
+@import 'colors.scss';
+
+.light {
+    width: 100%;
+    height: 4rem;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff5;
+    box-shadow: 0 0 8px #aaa5;
+    transition: .2s;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+
+        p {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .6rem;
+            font-size: 1.2rem;
+            color: $blue-gray-lite;
+            border-radius: 4px;
+            border: none;
+            transition: .2s;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $blue-gray-lite;
+                color: #fff;
+            }
+        }
+    }
+
+}
+
+.dark {
+    @extend .light;
+    background-color: #222c;
+    box-shadow: 0 0 8px #1115;
+    color: #fff;
+
+    .controls {
+        button {
+            background-color: $blue-gray-lite;
+            color: #fff;
+
+            &:hover {
+                background-color: #f0f0f0;
+                color: $blue-gray-lite;
+            }
+        }
+    }
+}

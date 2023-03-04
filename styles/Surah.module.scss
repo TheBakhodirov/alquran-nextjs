@@ -1,0 +1,19 @@
+@import 'colors';
+
+.light {
+    padding: 5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-image: url('../public/kaaba.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f5f7fb;
+    transition: .2s
+}
+
+.dark {
+    @extend .light;
+    background-color: $indigo;
+}
