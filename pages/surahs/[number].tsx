@@ -67,12 +67,12 @@ const Surah = ({ data, uzData }: PropType) => {
 export async function getStaticPaths() {
   const paths: PathsType = [];
 
-  for (let i = 1; i <= 114; i++) {
+  for (let i = 1; i <= 10; i++) {
     paths.push({ params: { number: `${i}` } });
   }
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
