@@ -91,6 +91,7 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
   useEffect(() => {
     if (firstInit) {
       setFirstInit(false);
+      isPlaying && dispatch(playerActions.pause());
     }
 
     if (!firstInit) {
