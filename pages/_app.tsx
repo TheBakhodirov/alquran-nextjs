@@ -1,6 +1,6 @@
 import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { store } from "store";
 import { Nunito } from "@next/font/google";
 import Navbar from "@/components/Navbar";
