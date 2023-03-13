@@ -4,12 +4,13 @@ import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import Image from "next/image";
 import Quran from "public/koran.png";
+import QuranListening from "public/quran-listen.png";
 import Praying from "public/prayer-time.png";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 export default function Home() {
-  const mode = useSelector((state: RootState) => state.themeReducer.mode);
+  const mode = useSelector((state: RootState) => state.theme.mode);
 
   return (
     <>
@@ -28,6 +29,12 @@ export default function Home() {
             <div className={styles.card}>
               <Image src={Quran} width={150} alt="Holy Quran" priority />
               <p>Qur'on suralari</p>
+            </div>
+          </Link>
+          <Link href="/player">
+            <div className={styles.card}>
+              <Image src={QuranListening} width={150} alt="Holy Quran Book" priority />
+              <p>Qur'on Tinglash</p>
             </div>
           </Link>
           <Link href="/prayers">

@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import axios from "axios";
 import { GetStaticProps, GetStaticPaths } from "next";
-import { type } from "os";
 import Link from "next/link";
+import SurahCard from "@/components/SurahCard";
 
 type surahData = {
   data: {
@@ -26,28 +26,19 @@ const api = axios.create({
 });
 
 const Surahs = ({ data }: PropType) => {
-  const mode = useSelector((state: RootState) => state.themeReducer.mode);
+  const mode = useSelector((state: RootState) => state.theme.mode);
 
   return (
     <div className={mode === "light" ? style.light : style.dark}>
-      {data.data.map((item) => {
-        return (
-          <Link href={`surahs/${item.number}`} key={item.number}>
-            <div className={style.surahBox}>
-              <div className={style.surahNumber}>
-                <p className={style.number}>{item.number}</p>
-              </div>
-              <div className={style.surahInfo}>
-                <p className={style.name}>{item.englishName}</p>
-                <p className={style.translationName}>
-                  {item.englishNameTranslation}
-                </p>
-                <p className={style.verseCount}>Verse {item.numberOfAyahs}</p>
-              </div>
-            </div>
-          </Link>
-        );
-      })}
+      <div className={style.surahsWrapper}>
+        {data.data.map((item) => {
+          return (
+            <Link href={`surahs/${item.number}`} key={item.number}>
+              <SurahCard item={item} />
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 };

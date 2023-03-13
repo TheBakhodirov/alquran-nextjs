@@ -2,15 +2,42 @@
 
 .light {
     padding: 5rem 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-image: url('../public/kaaba.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
     background-color: #f5f7fb;
-    transition: .2s
+    transition: .2s;
+
+    ::-webkit-scrollbar {
+        width: 6px;
+
+        &-track {
+            background: #aaa5;
+        }
+
+        &-thumb {
+            background: $green-lite;
+            border-radius: 4px;
+        }
+    }
+
+    .ayahsWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background-image: url('../public/kaaba.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    @media (max-width:568px) {
+        height: 100vh;
+        padding: 5rem .4rem .4rem;
+
+        .ayahsWrapper {
+            height: 100%;
+            padding-right: 0.4rem;
+            overflow-y: auto;
+        }
+    }
 }
 
 .dark {

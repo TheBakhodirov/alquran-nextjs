@@ -7,15 +7,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "@/store/themeSlice";
 import { RootState } from "@/store";
 import { useRouter } from "next/router";
-import { Tooltip } from "antd";
+import { Select, Tooltip } from "antd";
 import Link from "next/link";
+import { regions } from "@/constants";
+import { changeRegion } from "@/store/prayerSlice";
 
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const mode = useSelector((state: RootState) => state.themeReducer.mode);
+  const mode = useSelector((state: RootState) => state.theme.mode);
 
   const handleToggleTheme = () => dispatch(toggleTheme());
+
+  const onSelectChange = (value: String) => dispatch(changeRegion(value));
+  const onSelectSearch = () => {};
 
   return (
     <div className={mode === "light" ? style.light : style.dark}>
@@ -26,13 +31,29 @@ const Navbar = () => {
         </div>
       </Link>
       <div className={style.controls}>
-        <Tooltip title="Toggle theme" placement="bottom">
+        {router.route === "/prayers" && (
+          <Select
+            showSearch
+            defaultValue="Toshkent"
+            optionFilterProp="children"
+            onChange={onSelectChange}
+            className={style.select}
+            onSearch={onSelectSearch}
+            notFoundContent="No data"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={regions}
+            style={{ minWidth: "100px" }}
+          />
+        )}
+        <Tooltip title="Toggle theme" placement="bottom" mouseEnterDelay={1}>
           <button onClick={handleToggleTheme}>
             <BsMoonStarsFill />
           </button>
         </Tooltip>
         {router.route !== "/" && (
-          <Tooltip title="Go back" placement="bottom">
+          <Tooltip title="Go back" placement="bottom" mouseEnterDelay={1}>
             <button onClick={() => router.back()}>
               <FiArrowLeft />
             </button>

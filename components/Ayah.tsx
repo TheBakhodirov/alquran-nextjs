@@ -20,7 +20,7 @@ const Ayah = ({
   audio,
   changeSurah,
 }: AyahPropType) => {
-  const mode = useSelector((state: RootState) => state.themeReducer.mode);
+  const mode = useSelector((state: RootState) => state.theme.mode);
 
   const handleClick = () => {};
 

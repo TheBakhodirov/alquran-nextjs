@@ -42,23 +42,24 @@ const Surah = ({ data, uzData }: PropType) => {
   // console.log(data.data);
   // console.log(uzData.data);
 
-  const mode = useSelector((state: RootState) => state.themeReducer.mode);
+  const mode = useSelector((state: RootState) => state.theme.mode);
 
   return (
     <div className={mode === "light" ? style.light : style.dark}>
-      {data.data.ayahs.map((item, i) => {
-        return (
-          <Ayah
-            key={i}
-            surahNumber={data.data.number}
-            number={item.numberInSurah}
-            arText={item.text}
-            uzText={uzData.data.ayahs[i]?.text}
-            audio={item.audio}
-            // changeSurah={changeSurah}
-          />
-        );
-      })}
+      <div className={style.ayahsWrapper}>
+        {data.data.ayahs.map((item, i) => {
+          return (
+            <Ayah
+              key={i}
+              surahNumber={data.data.number}
+              number={item.numberInSurah}
+              arText={item.text}
+              uzText={uzData.data.ayahs[i]?.text}
+              audio={item.audio}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

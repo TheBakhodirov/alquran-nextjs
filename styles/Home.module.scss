@@ -2,6 +2,7 @@
 
 .light {
   min-height: 100vh;
+  padding-top: 6rem;
   display: grid;
   flex-direction: column;
   align-items: center;
@@ -18,7 +19,7 @@
     column-gap: 2rem;
 
     .card {
-      width: 200px;
+      width: 250px;
       padding: 1rem 2rem;
       display: flex;
       flex-direction: column;
