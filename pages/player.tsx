@@ -66,7 +66,7 @@ const SurahLoader = (
   <LoadingOutlined style={{ fontSize: 46, color: "#3a9f70" }} spin />
 );
 const AudioLoader = (
-  <LoadingOutlined style={{ fontSize: 20, color: "#3a9f70" }} spin />
+  <LoadingOutlined style={{ fontSize: 18, color: "#3a9f70" }} spin />
 );
 
 const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
@@ -85,13 +85,22 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
   const [firstInit, setFirstInit] = useState(true);
   const [showDrawer, setShowDrawer] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
+  const ayahsContainer = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const audio = audioElement.current;
 
   useEffect(() => {
+    return () => {
+      dispatch(playerActions.pause());
+      dispatch(playerActions.setCurrentSurahNumber(0));
+      dispatch(playerActions.setCurrentAudioNumber(0));
+      audio?.pause();
+    };
+  }, []);
+
+  useEffect(() => {
     if (firstInit) {
       setFirstInit(false);
-      isPlaying && dispatch(playerActions.pause());
     }
 
     if (!firstInit) {
@@ -129,6 +138,12 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
       setProgress(0);
       dispatch(playerActions.play());
       setCanPlay(true);
+      if (ayahsContainer.current) {
+        ayahsContainer.current.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
     }
     setLoading(false);
   }
@@ -137,6 +152,11 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
     if (audio?.paused || !isPlaying) {
       dispatch(playerActions.play());
     } else dispatch(playerActions.pause());
+  };
+
+  const handleChangeAyah = (ayahNumber: Number) => {
+    dispatch(playerActions.setCurrentAudioNumber(ayahNumber));
+    if (!isPlaying) dispatch(playerActions.play());
   };
 
   const handlePrev = () => {
@@ -200,7 +220,7 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
   return (
     <div className={mode === "light" ? style.light : style.dark}>
       <div className={style.playerMain}>
-        <div className={style.ayahsList}>
+        <div className={style.ayahsList} ref={ayahsContainer}>
           {ayahs.data.ayahs.map((item, index) => (
             <div
               className={
@@ -208,6 +228,7 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
                   ? style.activeAyahBox
                   : style.ayahBox
               }
+              onClick={() => handleChangeAyah(item.numberInSurah - 1)}
               key={index}
             >
               <div className={style.ayahInfo}>
@@ -234,24 +255,24 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
             onLoadStart={onLoading}
             onError={onError}
           ></audio>
-          {audioLoading && (
-            <div className={style.audioLoader}>
-              <Spin indicator={AudioLoader} />
-            </div>
-          )}
-          {audioFetchErr && (
-            <div className={style.audioError}>
-              <CloseOutlined />
-            </div>
-          )}
           <div className={style.mainBtns}>
             <div className={style.playBtns}>
               <button>
                 <TbPlayerSkipBack onClick={handlePrev} />
               </button>
-              <button onClick={handlePlay}>
-                {isPlaying ? <TbPlayerPause /> : <TbPlayerPlay />}
-              </button>
+              {audioLoading ? (
+                <div className={style.audioLoader}>
+                  <Spin indicator={AudioLoader} />
+                </div>
+              ) : audioFetchErr ? (
+                <div className={style.audioError}>
+                  <CloseOutlined />
+                </div>
+              ) : (
+                <button onClick={handlePlay}>
+                  {isPlaying ? <TbPlayerPause /> : <TbPlayerPlay />}
+                </button>
+              )}
               <button>
                 <TbPlayerSkipForward onClick={handleNext} />
               </button>

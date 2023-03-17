@@ -4,13 +4,14 @@
     padding: 5.2rem .4rem 1.2rem;
 
     ::-webkit-scrollbar {
-        width: 6px;
+        width: 10px;
 
         &-track {
             background: #aaa5;
         }
 
         &-thumb {
+            height: 70px;
             background: $green-lite;
             border-radius: 4px;
         }

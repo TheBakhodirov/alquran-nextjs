@@ -11,6 +11,7 @@ import { Select, Tooltip } from "antd";
 import Link from "next/link";
 import { regions } from "@/constants";
 import { changeRegion } from "@/store/prayerSlice";
+import { MouseEventHandler, useRef } from "react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -20,7 +21,6 @@ const Navbar = () => {
   const handleToggleTheme = () => dispatch(toggleTheme());
 
   const onSelectChange = (value: String) => dispatch(changeRegion(value));
-  const onSelectSearch = () => {};
 
   return (
     <div className={mode === "light" ? style.light : style.dark}>
@@ -33,31 +33,20 @@ const Navbar = () => {
       <div className={style.controls}>
         {router.route === "/prayers" && (
           <Select
-            showSearch
             defaultValue="Toshkent"
-            optionFilterProp="children"
             onChange={onSelectChange}
             className={style.select}
-            onSearch={onSelectSearch}
-            notFoundContent="No data"
-            filterOption={(input, option) =>
-              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-            }
             options={regions}
             style={{ minWidth: "100px" }}
           />
         )}
-        <Tooltip title="Toggle theme" placement="bottom" mouseEnterDelay={1}>
-          <button onClick={handleToggleTheme}>
-            <BsMoonStarsFill />
-          </button>
-        </Tooltip>
+        <button onClick={handleToggleTheme}>
+          <BsMoonStarsFill />
+        </button>
         {router.route !== "/" && (
-          <Tooltip title="Go back" placement="bottom" mouseEnterDelay={1}>
-            <button onClick={() => router.back()}>
-              <FiArrowLeft />
-            </button>
-          </Tooltip>
+          <button onClick={() => router.back()}>
+            <FiArrowLeft />
+          </button>
         )}
       </div>
     </div>

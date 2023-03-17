@@ -73,10 +73,6 @@ const Surah = () => {
         .finally(() => setLoading(false));
     };
 
-    if (isPlaying) {
-      dispatch(playerActions.pause());
-    }
-
     if (query.number !== undefined && !data) {
       getSurah();
     }
@@ -87,6 +83,15 @@ const Surah = () => {
       audioElement.current?.play();
     } else audioElement.current?.pause();
   }, [isPlaying, currentAudio]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(playerActions.pause());
+      dispatch(playerActions.setCurrentAudio(""));
+      dispatch(playerActions.setCurrentAudioNumber(0));
+      audioElement.current?.pause();
+    };
+  }, []);
 
   const onEnded = () => {
     dispatch(playerActions.pause());

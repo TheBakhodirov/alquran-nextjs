@@ -20,7 +20,7 @@
         align-items: center;
         gap: .4rem;
 
-        img{
+        img {
             transition: .2s;
         }
 
@@ -34,7 +34,7 @@
     .controls {
         display: flex;
         align-items: center;
-        gap: .8rem;
+        gap: .4rem;
 
         button {
             display: flex;
@@ -75,11 +75,11 @@
         padding: 1rem .6rem;
 
         .logo {
-            img{
+            img {
                 width: 30px;
                 height: 30px;
             }
-            
+
             p {
                 font-size: 1rem;
             }
@@ -101,8 +101,7 @@
     color: #fff;
 
     .controls {
-        gap: .4rem;
-        
+
         button {
             background-color: $blue-gray-lite;
             color: #fff;
