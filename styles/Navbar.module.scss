@@ -12,7 +12,7 @@
     background-color: #fff5;
     box-shadow: 0 0 8px #aaa5;
     transition: .2s;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(20px) saturate(2);
     z-index: 10;
 
     .logo {

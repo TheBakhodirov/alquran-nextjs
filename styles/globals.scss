@@ -37,3 +37,10 @@ button {
   background-color: transparent;
 }
 
+#nprogress .bar {
+  background: #3a9f70 !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #3a9f70, 0 0 5px #3a9f70 !important;
+}

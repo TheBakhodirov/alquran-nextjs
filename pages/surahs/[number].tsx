@@ -39,7 +39,9 @@ const api = axios.create({
   baseURL: "https://api.alquran.cloud/v1/surah",
 });
 
-const spinner = <LoadingOutlined style={{ fontSize: 60 }} spin />;
+const spinner = (
+  <LoadingOutlined style={{ fontSize: 60, color: "#3a9f70" }} spin />
+);
 
 const Surah = () => {
   const mode = useSelector((state: RootState) => state.theme.mode);

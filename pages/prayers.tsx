@@ -20,7 +20,9 @@ type DataType = {
   icon: StaticImageData;
 }[];
 
-const spinner = <LoadingOutlined style={{ fontSize: 60 }} spin />;
+const spinner = (
+  <LoadingOutlined style={{ fontSize: 60, color: "#3a9f70" }} spin />
+);
 
 const prayers = () => {
   const mode = useSelector((state: RootState) => state.theme.mode);
