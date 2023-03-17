@@ -1,7 +1,7 @@
 import style from "styles/QuranPlayer.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { Scheherazade_New } from "@next/font/google";
 import axios from "axios";
 import {
@@ -377,7 +377,7 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const { data: surahs } = await api.get("");
   const { data: audioData } = await api.get(`${1}/ar.alafasy`);
   const { data: uzData } = await api.get(`/${1}/uz.sodik`);
