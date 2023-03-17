@@ -4,7 +4,7 @@ import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "styles/Prayers.module.scss";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import prayersTimeHelpers from "@/utils/prayerTimesHelpers";
 import Image, { StaticImageData } from "next/image";
 import { message } from "antd";
@@ -102,7 +102,7 @@ const prayers = ({ data }: PropType) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await api.get("day?region=Toshkent");
 
   const result = prayersTimeHelpers.handleData(data?.times);
