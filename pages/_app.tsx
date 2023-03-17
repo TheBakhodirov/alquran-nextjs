@@ -8,6 +8,7 @@ import Player from "@/components/Player";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { Analytics } from "@vercel/analytics/react";
 
 NProgress.configure({ showSpinner: false, parent: "#loading-bar" });
 
@@ -39,6 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <div id="loading-bar"></div>
         <Component {...pageProps} />
         <Player />
+        <Analytics />
       </main>
     </Provider>
   );
