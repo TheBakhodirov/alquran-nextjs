@@ -92,7 +92,7 @@ const QuranPlayer = ({ surahs, audioData, uzData }: PlayerProps) => {
   useEffect(() => {
     return () => {
       dispatch(playerActions.pause());
-      dispatch(playerActions.setCurrentSurahNumber(0));
+      dispatch(playerActions.setCurrentSurahNumber(1));
       dispatch(playerActions.setCurrentAudioNumber(0));
       audio?.pause();
     };
