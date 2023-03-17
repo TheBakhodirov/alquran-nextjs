@@ -1,17 +1,20 @@
 import { images } from "@/constants";
 import { StaticImageData } from "next/image";
 
-type DataTypes = String[];
+type DataTypes = string[];
 
-type PrayerTimes = {
-  time: String;
+type PrayerData = {
+  time: string;
   isCurrent: Boolean;
-  name: String;
+  name: string;
   icon: StaticImageData;
-}[];
+};
 
-function handleData(obj: DataTypes) {
+type PrayerTimes = PrayerData[];
+
+function handleData(obj: DataTypes): PrayerTimes {
   const prayerTimes: PrayerTimes = [];
+
   Object.values(obj).map((value, index) => {
     prayerTimes.push({
       ...images.prayerTimesIcons[index],
@@ -27,34 +30,48 @@ function handleData(obj: DataTypes) {
   return prayerTimes;
 }
 
-function getTime(): String {
+function revalidateData(data: PrayerTimes): PrayerTimes {
+  const revalidatedData: PrayerTimes = [];
+
+  data.map((prayer, index) => {
+    revalidatedData.push({
+      ...prayer,
+      isCurrent: isCurrentPrayer(
+        prayer.time,
+        data[index + 1].time,
+        data[0].time
+      ),
+    });
+  });
+
+  return revalidatedData;
+}
+
+function getTime(): string {
   const date = new Date();
   let minutes = date.getMinutes().toString();
   let hours = date.getHours().toString();
+
   if (parseInt(minutes) < 10) {
     minutes = "0" + minutes;
   }
-  if (parseInt(hours) < 10) {
-    hours = "0" + hours;
-  }
-  const time = `${hours} : ${minutes}`;
+
+  const time = `${hours}${minutes}`;
+
   return time;
 }
 
 function isCurrentPrayer(
-  prayerTime: String,
-  nextPrayerTime: String,
-  fajrTime: String
+  prayerTime: string,
+  nextPrayerTime: string,
+  fajrTime: string
 ) {
   let isCurrent = false;
-  const time = getTime();
-  const currentTime = parseInt(time.match(/\d/g)?.join("") || "0000");
-  // @ts-ignore: Object is possibly 'null'.
-  const currentPrayer = parseInt(prayerTime?.match(/\d/g).join(""));
-  // @ts-ignore: Object is possibly 'null'.
-  const nextPrayer = parseInt(nextPrayerTime?.match(/\d/g).join(""));
-  // @ts-ignore: Object is possibly 'null'.
-  const fajr = parseInt(fajrTime?.match(/\d/g).join(""));
+  const currentTime = parseInt(getTime());
+
+  const currentPrayer = parseInt(prayerTime.replace(":", ""));
+  const nextPrayer = parseInt(nextPrayerTime?.replace(":", ""));
+  const fajr = parseInt(fajrTime.replace(":", ""));
 
   if (
     (currentTime >= currentPrayer && currentTime < nextPrayer) ||
@@ -66,4 +83,4 @@ function isCurrentPrayer(
   return isCurrent;
 }
 
-export default { handleData, getTime };
+export default { handleData, revalidateData, getTime };

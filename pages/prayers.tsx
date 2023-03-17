@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { images } from "@/constants";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "styles/Prayers.module.scss";
 import { GetServerSideProps } from "next";
-import prayersTimeHelpers from "@/utils/prayersTimeHelpers";
+import prayersTimeHelpers from "@/utils/prayerTimesHelpers";
 import Image, { StaticImageData } from "next/image";
 import { message } from "antd";
 
@@ -15,9 +15,9 @@ const api = axios.create({
 
 type PropType = {
   data: {
-    time: String;
+    time: string;
     isCurrent: Boolean;
-    name: String;
+    name: string;
     icon: StaticImageData;
   }[];
 };
@@ -28,6 +28,8 @@ const prayers = ({ data }: PropType) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [prayersData, setPrayersData] = useState(data);
   const [firstInit, setFirstInit] = useState(true);
+  const activePrayerDiv = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const getPrayerData = async () => {
@@ -48,13 +50,26 @@ const prayers = ({ data }: PropType) => {
     if (firstInit) {
       setFirstInit(false);
       return;
-    } else getPrayerData();
+    } else {
+      getPrayerData();
+      container.current?.scrollTo({
+        left: activePrayerDiv.current!.offsetLeft,
+        behavior: "smooth",
+      });
+    }
   }, [region]);
+
+  useEffect(() => {
+    container.current?.scrollTo({
+      left: activePrayerDiv.current!.offsetLeft,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <div className={mode === "light" ? style.light : style.dark}>
       <div className={style.prayerTimes}>
-        <div className={style.foreground}>
+        <div className={style.foreground} ref={container}>
           {prayersData?.map((prayer, index) => (
             <div
               key={index}
@@ -64,6 +79,7 @@ const prayers = ({ data }: PropType) => {
               style={{
                 backgroundImage: `url(${images.prayerBgImgs[index].src})`,
               }}
+              ref={prayer.isCurrent ? activePrayerDiv : null}
             >
               <div className={style.prayerName}>
                 <Image

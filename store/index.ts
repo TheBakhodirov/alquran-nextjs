@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from "./themeSlice";
-import playerReducer from "./playerSlice";
+import themeSlice from "./themeSlice";
+import playerSlice from "./playerSlice";
 import prayerSlice from "./prayerSlice";
+import langSlice from "./langSlice";
 
 export const store = configureStore({
   reducer: {
-    theme: themeReducer,
-    player: playerReducer,
+    theme: themeSlice,
+    language: langSlice,
+    player: playerSlice,
     prayer: prayerSlice,
   },
 });

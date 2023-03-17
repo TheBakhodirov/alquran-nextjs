@@ -36,6 +36,14 @@
         align-items: center;
         gap: .4rem;
 
+        .select {
+            :global {
+                .ant-select-selector {
+                    border: none;
+                }
+            }
+        }
+
         button {
             display: flex;
             align-items: center;
@@ -102,6 +110,20 @@
 
     .controls {
 
+        .select {
+
+            :global {
+                .ant-select-selector {
+                    background-color: $blue-gray-lite;
+                    color: #fff;
+                }
+
+                .ant-select-arrow {
+                    color: #fff;
+                }
+            }
+        }
+
         button {
             background-color: $blue-gray-lite;
             color: #fff;
@@ -109,6 +131,7 @@
             &:hover {
                 background-color: #f0f0f0;
                 color: $blue-gray-lite;
+                color: #abb9d5;
             }
         }
     }

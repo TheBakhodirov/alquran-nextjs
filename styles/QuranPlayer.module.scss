@@ -238,7 +238,7 @@
 .light {
     height: 100vh;
     padding: 5rem 1rem 2rem;
-    background-color: #ddd;
+    background-color: #eee;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -265,7 +265,7 @@
         display: flex;
         flex-direction: column;
         gap: .6rem;
-        background-color: #eee;
+        background-color: #fff;
         border-radius: 10px;
 
         .ayahsList {
@@ -358,7 +358,7 @@
             align-items: center;
             justify-content: space-evenly;
             gap: .5rem;
-            background-color: #ddd;
+            background-color: #eee;
             border-radius: 6px;
 
             .mainBtns {
@@ -407,6 +407,9 @@
                 }
 
                 .controlBtns {
+                    background-color: #fff;
+                    border-radius: 5px;
+
                     .drawerTriggerBtn {
                         padding: .4rem .5rem;
                         display: flex;
@@ -417,6 +420,7 @@
                         border-radius: 4px;
                         font-size: 1rem;
                         display: none;
+                        background: transparent;
                     }
                 }
 
@@ -425,7 +429,7 @@
             .progressBarWrapper {
                 width: 100%;
                 height: 4px;
-                background-color: #fff3;
+                background-color: #fff;
                 border-radius: 2px;
                 overflow: hidden;
                 align-self: flex-end;
@@ -554,13 +558,17 @@
             .mainBtns {
 
                 .playBtns,
-                .controlBtns button {
+                .controlBtns {
                     background-color: $blue-gray-lite;
                 }
 
                 button {
                     color: #fff;
                 }
+            }
+
+            .progressBarWrapper {
+                background-color: $blue-gray-lite
             }
         }
     }

@@ -36,6 +36,10 @@ const Navbar = () => {
             defaultValue="Toshkent"
             onChange={onSelectChange}
             className={style.select}
+            dropdownStyle={{
+              background: mode === "light" ? "#fff" : "#abb9d5",
+            }}
+            popupClassName={style.dropDown}
             options={regions}
             style={{ minWidth: "100px" }}
           />

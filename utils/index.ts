@@ -1,1 +1,1 @@
-export { default as prayerHelpers } from "./prayersTimeHelpers";
+export { default as prayerHelpers } from "./prayerTimesHelpers";
