@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
-import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import Image from "next/image";
 import Quran from "public/koran.png";
