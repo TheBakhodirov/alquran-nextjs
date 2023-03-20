@@ -21,6 +21,10 @@ export default function Home() {
           content="Holy Quran website with prayer times"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="google-site-verification"
+          content="KaNPqCxeG6p8tjTjfNdfIpXD7gU3AdVW_2nbf4HN__o"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={mode === "light" ? styles.light : styles.dark}>
@@ -33,7 +37,12 @@ export default function Home() {
           </Link>
           <Link href="/player">
             <div className={styles.card}>
-              <Image src={QuranListening} width={150} alt="Holy Quran Book" priority />
+              <Image
+                src={QuranListening}
+                width={150}
+                alt="Holy Quran Book"
+                priority
+              />
               <p>Qur'on Tinglash</p>
             </div>
           </Link>
